@@ -714,6 +714,7 @@ async function exchange() {
         }
 
         if (players == 2) {
+            await sleep(1000);
             temp_hide();
             await sleep(1000);
         }
@@ -735,6 +736,7 @@ async function pass() {
     if (len.length == history_length) document.querySelector(".history").innerText = len.slice(1).join("\n");
     document.querySelector(".history").innerText += `pass\n`;
     if (players == 2) {
+        await sleep(1000);
         temp_hide();
         await sleep(1000);
     }
@@ -823,6 +825,7 @@ async function score() {
     }
 
     if (players == 2) {
+        await sleep(1000);
         temp_hide();
         await sleep(1000);
     }
