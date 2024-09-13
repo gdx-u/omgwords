@@ -1,0 +1,94 @@
+* {
+    user-select: none;
+    font-size: 20px;
+}
+
+html, body {
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+.square {
+    display: block;
+    position: absolute;
+    width: 32px;
+    height: 32px;
+    border: 1px solid black;
+    border-radius: 0px;
+    margin: 0;
+    padding: 0;
+    line-height: 32px;
+    font-family: 'Courier New', Courier, monospace;
+    text-align: center;
+}
+
+.square :not(.empty) {
+    background: purple;
+}
+
+.square .new {
+    background: yellow;
+}
+
+br {
+    height: 0;
+}
+
+.history {
+    padding: 4px;
+    position: absolute;
+    display: block;
+    width: 24vw;
+    left: 50vw;
+    height: 77vh;
+    top: 5vh;
+    border: 2px solid black;
+    border-radius: 10px;
+    font-family: 'Courier New', courier, monospace;
+}
+
+.exch {
+    width: 120px;
+    height: 32px;
+    display: block;
+    position: absolute;
+    top: calc(82vh + 36px);
+    left: 280px;
+    border-radius: 6px;
+    border: 1px solid black;
+}
+
+.pass {
+    width: 120px;
+    height: 32px;
+    display: block;
+    position: absolute;
+    top: calc(82vh + 36px);
+    left: 416px;
+    border-radius: 6px;
+    border: 1px solid black;
+}
+
+.cover {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    line-height: 100vh;
+    color: white;
+    font-size: 240px;
+    text-align: center;
+    background: black;
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    display: block;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    opacity: 0;
+    transition: opacity 1s;
+    z-index: 1000;
+    pointer-events: none;
+}
