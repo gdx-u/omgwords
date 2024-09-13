@@ -9,7 +9,7 @@ let handicap = {
 let dict = [];
 let sd = [];
 async function load_dictionary() {
-    let file = await fetch("/dict.txt");
+    let file = await fetch("dict.txt");
     let text = await file.text();
     dict = text.split("\r\n");
     sd = text.split("\r\n").map(e => [...e].sort().join(""));
