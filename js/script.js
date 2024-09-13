@@ -1,3 +1,11 @@
+// Get gamevars
+let players = 2;
+let clabbers = confirm("Clabbers?")
+let handicap = {
+    points: Number(prompt("Points handicap?")) || 0,
+    clabbers: !clabbers && confirm("Clabbers handicap?")
+};
+
 let dict = [];
 let sd = [];
 async function load_dictionary() {
