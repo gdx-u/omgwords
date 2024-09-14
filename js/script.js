@@ -802,7 +802,7 @@ async function score() {
     }
 
     let word_score = running * word_bonus;
-    if (!rack) word_score += 50;
+    if (typed.length == 7) word_score += 50;
     word_score += score_parallel(word_bonus);
     word_score += score_perpendicular();
     label_play(word_score);
