@@ -678,7 +678,7 @@ function label_play(score) {
 
     let len = document.querySelector(".history").innerText.split("\n");
     if (len.length == history_length) document.querySelector(".history").innerText = len.slice(1).join("\n");
-    document.querySelector(".history").innerText += `${co} ${co.length == 2 ? " " : ""}${out}${typed.length == 7 ? " ❤️" : ""} +${score} =${player_scores[player] + score}\n`;
+    document.querySelector(".history").innerHTML += `${co} ${co.length == 2 ? "&nbsp;" : ""}${out}${typed.length == 7 ? " ❤️" : ""} +${score} =${player_scores[player] + score}<br/>`;
 }
 
 function sleep(ms) {
