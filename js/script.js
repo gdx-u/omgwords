@@ -880,7 +880,7 @@ function glp() {
     return mrc + added.slice(0, added.length - 1);
 }
 
-let history_length = 21;
+let history_length = 22;
 
 generate_board();
 
