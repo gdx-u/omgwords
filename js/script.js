@@ -1,11 +1,13 @@
 // Get gamevars
 let players = 2;
-let clabbers = confirm("Clabbers?")
+let clabbers = localStorage.getItem("clabbers") == "true";
+let randomised = localStorage.getItem("random") == "true";
 let handicap = {
-    points: Number(prompt("Points handicap?")) || 0,
-    clabbers: !clabbers && confirm("Clabbers handicap?")
+    points: Number(localStorage.getItem("points")) || 0,
+    clabbers: !clabbers && localStorage.getItem("clabbers_1s")
 };
 
+let waiting = false;
 let dict = [];
 let sd = [];
 async function load_dictionary() {
@@ -109,6 +111,19 @@ function create_square(x, y) {
 
 function generate_board() {
     let layout="T  d   T   d  T* D   t   t   D *  D   d d   D  *d  D   d   D  d*    D     D    * t   t   t   t *  d   d d   d  *T  d   S   d  T";
+    if (randomised) {
+        layout = layout.replaceAll("*", "");
+        let nl = "";
+        while (layout) {
+            let i = Math.round(Math.random() * (layout.length - 1));
+            nl += layout[i];
+            layout = layout.slice(0, i) + layout.slice(i + 1);
+        }
+        layout = nl;
+        for (let i = 1; i <= 7; i++) layout = layout.slice(0, 16 * i - 1) + "*" + layout.slice(16 * i - 1);
+        layout = layout.replace("S", " ");
+        layout = layout.slice(0, 119) + "S" + layout.slice(120);
+    }
     let parts = layout.split("*");
     for (let i = parts.length - 2; i >= 0; i--) {
         parts.push(parts[i]);
@@ -126,7 +141,7 @@ function generate_board() {
                 case "S":
                     squaresHM[square.id].is_starting_tile = true;
                     squaresHM[square.id].word_bonus = 2;
-                    square.style.background = "red";
+                    square.style.background = "yellow";
                     break;
                 case "d":
                     squaresHM[square.id].tile_bonus = 2;
@@ -774,9 +789,12 @@ async function end_game() {
 }
 
 async function score() {
+    if (waiting) return;
+    waiting = true;
     for (let el of Object.values(placed)) el.classList.add("temp");
     if (!check_parallel() || !check_perpendicular()) {
         for (let el of document.querySelectorAll(".temp")) el.classList.remove("temp");
+        waiting = false;
         return;
     }
     for (let el of document.querySelectorAll(".temp")) el.classList.remove("temp");
@@ -841,7 +859,8 @@ async function score() {
     if (cursor) cursor.innerText = "";
     cursor = null;
 
-    document.title = `${player == 1 ? "(" : ""}${player_scores[1]}${player == 1 ? ")" : ""} : ${player == 2 ? "(" : ""}${player_scores[2]}${player == 2 ? ")" : ""}`
+    document.title = `${player == 1 ? "(" : ""}${player_scores[1]}${player == 1 ? ")" : ""} : ${player == 2 ? "(" : ""}${player_scores[2]}${player == 2 ? ")" : ""}`;
+    waiting = false;
 }
 
 function get_sliceH(y) {
@@ -888,4 +907,53 @@ async function temp_hide() {
     document.querySelector(".cover").style.opacity = "1";
     await sleep(3000); // TODO: CSS
     document.querySelector(".cover").style.opacity = "0";
+}
+
+// Attach settings handlers
+
+for (let el of document.querySelectorAll(".inp")) {
+    switch (el.id) {
+        case "points":
+            el.value = localStorage.getItem("points") || "0";
+            break;
+        case "clabbers":
+            el.checked = localStorage.getItem("clabbers") == "true";
+            if (el.checked) {
+                let hc = document.querySelector("#clabbers_1s");
+                hc.checked = false;
+                hc.disabled = true;
+            }
+            break;
+        case "clabbers_1s":
+            if (el.disabled) break;
+            el.checked = localStorage.getItem("clabbers_1s") == "true";
+            break;
+        default:
+            el.checked = localStorage.getItem(el.id) == "true";
+            break;
+    }
+    el.onchange = (e) => {
+        switch (e.target.value) {
+            case "on": 
+                if (e.target.id == "refresh") location.reload();
+                else {
+                    localStorage.setItem(e.target.id, String(e.target.checked));
+                    if (e.target.id == "clabbers") {
+                        if (e.target.checked) {
+                            let hc = document.querySelector("#clabbers_1s");
+                            hc.checked = false;
+                            hc.disabled = true;
+                        } else {
+                            let hc = document.querySelector("#clabbers_1s");
+                            hc.checked = localStorage.getItem("clabbers_1s") == "true";
+                            hc.disabled = false;
+                        }
+                    }
+                }
+                break;
+            default:
+                localStorage.setItem(e.target.id, String(e.target.value));
+                break;
+        }
+    }
 }
