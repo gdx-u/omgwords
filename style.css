@@ -92,3 +92,44 @@ br {
     z-index: 1000;
     pointer-events: none;
 }
+
+.inp {
+    position: absolute;
+    left: 75vw;
+    width: 32px;
+    height: 32px;
+}
+
+.p {
+    position: absolute;
+    left: 81vw;
+    height: 32px;
+    padding: 0px;
+    margin: 0;
+    line-height: 38px;
+    font-family: "Courier New", courier, monospace;
+    width: 100vw !important;
+    word-break: keep-all;
+    overflow: hidden;
+}
+
+.i1 {
+    top: calc(40vh - 80px);
+}
+
+.i2 {
+    top: calc(40vh - 40px);
+}
+
+.i3 {
+    width: 64px;
+    top: 40vh;
+}
+
+.i4 {
+    top: calc(40vh + 40px);
+}
+
+.i5 {
+    top: calc(40vh + 80px);
+}
