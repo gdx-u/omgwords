@@ -11,8 +11,9 @@ let waiting = false;
 let dict = [];
 let sd = [];
 async function load_dictionary() {
-    let file = await fetch("dict.txt");
+    let file = await fetch("dictenc.txt");
     let text = await file.text();
+    text = atob(text);
     dict = text.split("\r\n");
     sd = text.split("\r\n").map(e => [...e].sort().join(""));
     sd = [...new Set(sd)];
