@@ -730,9 +730,9 @@ async function exchange() {
         }
 
         if (players == 2) {
-            await sleep(1000);
+            await sleep(100);
             temp_hide();
-            await sleep(1000);
+            await sleep(100);
         }
 
         racks[player] = rack;
@@ -752,9 +752,9 @@ async function pass() {
     if (len.length == history_length) document.querySelector(".history").innerText = len.slice(1).join("\n");
     document.querySelector(".history").innerText += `pass\n`;
     if (players == 2) {
-        await sleep(1000);
+        await sleep(100);
         temp_hide();
-        await sleep(1000);
+        await sleep(100);
     }
     racks[player] = rack;
     player = 3 - player;
@@ -777,7 +777,7 @@ async function end_game() {
     player_scores[2] += p1r * 2;
 
     document.title = `${player == 1 ? "(" : ""}${player_scores[1]}${player == 1 ? ")" : ""} : ${player == 2 ? "(" : ""}${player_scores[2]}${player == 2 ? ")" : ""}`
-    await sleep(1000);
+    await sleep(100);
 
     if (player_scores[1] == player_scores[2]) alert("It's a tie!");
     else {
@@ -844,9 +844,9 @@ async function score() {
     }
 
     if (players == 2) {
-        await sleep(1000);
+        await sleep(100);
         temp_hide();
-        await sleep(1000);
+        await sleep(100);
     }
 
     player = 3 - player;
