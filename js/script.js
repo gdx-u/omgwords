@@ -906,7 +906,7 @@ generate_board();
 
 async function temp_hide() {
     document.querySelector(".cover").style.opacity = "1";
-    await sleep(3000); // TODO: CSS
+    await sleep(300); // TODO: CSS
     document.querySelector(".cover").style.opacity = "0";
 }
 
