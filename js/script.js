@@ -958,3 +958,5 @@ for (let el of document.querySelectorAll(".inp")) {
         }
     }
 }
+
+document.oncontextmenu = (e) => {e.preventDefault()};
